@@ -1,2 +1,4 @@
 # xmas
-Xmas random gift generator
+This program generates the list of gift giver/receiver. 
+
+
