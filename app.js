@@ -29,31 +29,15 @@ app.controller('MainCtrl', function($scope) {
     {"exp" : 11, "dest" :4},
     ]};
   
-  $scope.listExp = {"data" : [
-    {"nom" : "mathieu", "id" : 1, "famille" :1 },
-    {"nom" : "yves", "id" : 2, "famille" :1 }, 
-    {"nom" : "martine", "id" : 3, "famille" :1 },
-    {"nom" : "benoit", "id" : 4, "famille" :1 },
-    {"nom" : "pauline", "id" : 5, "famille" :4 },
-    {"nom" : "michele", "id" : 6, "famille" :2 },
-    {"nom" : "patrick", "id" : 7, "famille" :2 },
-    {"nom" : "thomas", "id" : 8, "famille" :2 },
-    {"nom" : "stephane", "id" : 9, "famille" :2 },
-    {"nom" : "bernard", "id" : 10, "famille" :3 },
-    {"nom" : "nicole", "id" : 11, "famille" :3 },
-    {"nom" : "Yvon", "id" : 12, "famille" :4 },
-    {"nom" : "Christine", "id" : 13, "famille" :4 }
-  ]};
+  $scope.listExp = null;
+  $scope.listDest = null;
+  $scope.results = null;
+  $scope.logText = null;
   
-  $scope.listDest = angular.copy($scope.listExp);
-  $scope.results = [];
-  $scope.logText = [];
+  
   
   $scope.findDest = function(expIndex, destIndex) {
-  
-      
       return false;
-    
   }
   
   checkInvert = function(idExp, idDest) {
@@ -90,69 +74,93 @@ app.controller('MainCtrl', function($scope) {
         return false;
   }
   
+  $scope.exportCurrentData = function() {
+    var currentExport = {data: []};
+    
+    for(var i=0;i<$scope.results.length;i++) {
+      currentExport.data.push({exp: $scope.results[i].exp.id, dest : $scope.results[i].dest.id});
+    }
+    
+    $scope.log2(currentExport);
+  }
   
   $scope.log2 = function(log) {
     console.log(log);
     $scope.logText.push(log);
   }
   
-  $scope.clear = function(log) {
+  $scope.init = function(log) {
     $scope.listExp = {"data" : [
-    {"nom" : "mathieu", "id" : 1, "famille" :1 },
-    {"nom" : "yves", "id" : 2, "famille" :1 }, 
-    {"nom" : "martine", "id" : 3, "famille" :1 },
-    {"nom" : "benoit", "id" : 4, "famille" :1 },
-    {"nom" : "pauline", "id" : 5, "famille" :1 },
-    {"nom" : "michele", "id" : 6, "famille" :2 },
-    {"nom" : "patrick", "id" : 7, "famille" :2 },
-    {"nom" : "thomas", "id" : 8, "famille" :2 },
-    {"nom" : "stephane", "id" : 9, "famille" :2 },
-    {"nom" : "bernard", "id" : 10, "famille" :3 },
-    {"nom" : "nicole", "id" : 11, "famille" :3 }
-  ]};
-  
-  $scope.listDest = angular.copy($scope.listExp);
-  $scope.results = [];
-  $scope.logText = [];
+      {"nom" : "mathieu", "id" : 1, "famille" :1 },
+      {"nom" : "yves", "id" : 2, "famille" :1 }, 
+      {"nom" : "martine", "id" : 3, "famille" :1 },
+      {"nom" : "benoit", "id" : 4, "famille" :1 },
+      {"nom" : "pauline", "id" : 5, "famille" :4 },
+      {"nom" : "michele", "id" : 6, "famille" :2 },
+      {"nom" : "patrick", "id" : 7, "famille" :2 },
+      {"nom" : "thomas", "id" : 8, "famille" :2 },
+      {"nom" : "stephane", "id" : 9, "famille" :2 },
+      {"nom" : "bernard", "id" : 10, "famille" :3 },
+      {"nom" : "nicole", "id" : 11, "famille" :3 },
+      {"nom" : "Yvon", "id" : 12, "famille" :4 },
+      {"nom" : "Christine", "id" : 13, "famille" :4 }
+    ]};
+    
+    $scope.listDest = angular.copy($scope.listExp);
+    $scope.results = [];
+    $scope.logText = [];
   }
   
+  function randomNumber() {
+      return Math.floor((Math.random() * $scope.listDest.data.length)); 
+  }
   
   $scope.run = function() {
     
-    // $scope.listExp.data.splice(1,1);
-    //delete $scope.listExp.data[1];
-    // return
-
-    //for(var i =0;i < $scope.listExp.data.length;i++){
-     i = 0;
-      var rand = Math.floor((Math.random() * $scope.listDest.data.length));
+     $scope.init();
+     var dataLength = $scope.listExp.data.length;
+     var j = 0;
+     var found = 0;
+     var i=0;
+     
+     while(found<dataLength) {
       
-      if($scope.listExp.data[i].id === $scope.listDest.data[rand].id) {
-        $scope.log2("Meme personne ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
-      }
-      else if($scope.listExp.data[i].famille === $scope.listDest.data[rand].famille) {
-        $scope.log2("Meme famille ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
-      }
-      else if(checkRun2015($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
-        $scope.log2("en 2015 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
-      }
-      else if(checkRun2016($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
-        $scope.log2("en 2016 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
-      }
-      else {
-         $scope.results.push({
-           "exp":$scope.listExp.data[i],
-           "dest" :$scope.listDest.data[rand]
-         });
-         $scope.listExp.data.splice(i,1);
-         $scope.listDest.data.splice(rand,1);
-      }
-    // }
+        var rand = randomNumber();
+        
+        if($scope.listExp.data[i].id === $scope.listDest.data[rand].id) {
+          $scope.log2("Meme personne ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+          
+        }
+        else if($scope.listExp.data[i].famille === $scope.listDest.data[rand].famille) {
+          $scope.log2("Meme famille ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
+        else if(checkRun2015($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+          $scope.log2("en 2015 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
+        else if(checkRun2016($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+          $scope.log2("en 2016 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
+        else {
+          $scope.results.push({
+            "exp":$scope.listExp.data[i],
+            "dest" :$scope.listDest.data[rand]
+          });
+          found++;
+          $scope.listExp.data.splice(i,1);
+          $scope.listDest.data.splice(rand,1);
+        }
+        
+        j++;
+        if(j>100) {
+          $scope.log2("Le programme n'arrive pas a determiner une generation correcte - recommencez !");
+          break;
+        }
+     }
     
-  }
+  };
   
   
   
-  
+  $scope.init();
   
 });
