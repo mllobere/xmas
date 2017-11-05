@@ -11,9 +11,10 @@
   </head>
 
   <body ng-controller="MainCtrl">
-    <button ng-click="clear()"> CLEAR </button> <BR>
+    <button ng-click="init()"> CLEAR </button> <BR>
     <button ng-click="run()"> LANCER L'AFFECTATION DE CADEAU!! </button> <BR>
-  
+    <button ng-click="exportCurrentData()"> Afficher data JSON pour année suivate </button> <BR>
+
     --- Liste des ofrants [{{listExp.data.length}}]:
     <div ng-repeat="n in listExp.data"> {{n.nom}}</div>
     --- Liste des receveurs [{{listDest.data.length}}]:
