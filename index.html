@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="plunker">
+
+  <head>
+    <meta charset="utf-8" />
+    <title>AngularJS Plunker</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <link rel="stylesheet" href="style.css" />
+    <script data-require="angular.js@1.5.x" src="https://code.angularjs.org/1.5.8/angular.js" data-semver="1.5.8"></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body ng-controller="MainCtrl">
+    <button ng-click="clear()"> CLEAR </button> <BR>
+    <button ng-click="run()"> LANCER L'AFFECTATION DE CADEAU!! </button> <BR>
+  
+    --- Liste des ofrants [{{listExp.data.length}}]:
+    <div ng-repeat="n in listExp.data"> {{n.nom}}</div>
+    --- Liste des receveurs [{{listDest.data.length}}]:
+    <div ng-repeat="n in listDest.data"> {{n.nom}}</div>
+     --- Log :
+    <div style="color:red" ng-repeat="n in logText track by $index"> {{n}}</div>
+    --- Resultats :
+    <div ng-repeat="n in results track by $index"> {{n.exp.nom}} => {{n.dest.nom}}</div>
+  </body>
+
+</html>
