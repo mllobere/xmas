@@ -2,7 +2,7 @@ var app = angular.module('plunker', []);
 
 app.controller('MainCtrl', function($scope) {
   
-  var run2016 = {data:[
+  var run2015 = {data:[
     {"exp" : 1, "dest" :9},
     {"exp" : 2, "dest" :8},
     {"exp" : 3, "dest" :11},
@@ -14,19 +14,35 @@ app.controller('MainCtrl', function($scope) {
     {"exp" : 10, "dest" :7},
     {"exp" : 11, "dest" :1},
     ]};
+    
+  var run2016 = {data:[
+    {"exp" : 1, "dest" :10},
+    {"exp" : 2, "dest" :9},
+    {"exp" : 3, "dest" :8},
+    {"exp" : 4, "dest" :7},
+    {"exp" : 5, "dest" :11},
+    {"exp" : 6, "dest" :1},
+    {"exp" : 7, "dest" :5},
+    {"exp" : 8, "dest" :3},
+    {"exp" : 9, "dest" :2},
+    {"exp" : 10, "dest" :6},
+    {"exp" : 11, "dest" :4},
+    ]};
   
   $scope.listExp = {"data" : [
     {"nom" : "mathieu", "id" : 1, "famille" :1 },
     {"nom" : "yves", "id" : 2, "famille" :1 }, 
     {"nom" : "martine", "id" : 3, "famille" :1 },
     {"nom" : "benoit", "id" : 4, "famille" :1 },
-    {"nom" : "pauline", "id" : 5, "famille" :1 },
+    {"nom" : "pauline", "id" : 5, "famille" :4 },
     {"nom" : "michele", "id" : 6, "famille" :2 },
     {"nom" : "patrick", "id" : 7, "famille" :2 },
     {"nom" : "thomas", "id" : 8, "famille" :2 },
     {"nom" : "stephane", "id" : 9, "famille" :2 },
     {"nom" : "bernard", "id" : 10, "famille" :3 },
-    {"nom" : "nicole", "id" : 11, "famille" :3 }
+    {"nom" : "nicole", "id" : 11, "famille" :3 },
+    {"nom" : "Yvon", "id" : 12, "famille" :4 },
+    {"nom" : "Christine", "id" : 13, "famille" :4 }
   ]};
   
   $scope.listDest = angular.copy($scope.listExp);
@@ -48,6 +64,18 @@ app.controller('MainCtrl', function($scope) {
           }
       }
       return false;
+  }
+  
+  checkRun2015 = function(idExp, idDest) {
+        for(var i =0;i < run2015.data.length;i++){
+          if(run2015.data[i].exp === idExp) {
+            if(run2015.data[i].dest === idDest) {
+               return true;
+            }  
+            return false;
+          }
+        }
+        return false;
   }
   
   checkRun2016 = function(idExp, idDest) {
@@ -104,6 +132,9 @@ app.controller('MainCtrl', function($scope) {
       }
       else if($scope.listExp.data[i].famille === $scope.listDest.data[rand].famille) {
         $scope.log2("Meme famille ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+      }
+      else if(checkRun2015($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+        $scope.log2("en 2015 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
       }
       else if(checkRun2016($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
         $scope.log2("en 2016 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
