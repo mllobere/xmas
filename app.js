@@ -28,7 +28,24 @@ app.controller('MainCtrl', function($scope) {
     {"exp" : 10, "dest" :6},
     {"exp" : 11, "dest" :4},
     ]};
-  
+    
+    var run2017 = {data:[
+    {"exp" : 11, "dest" :7}, //nicole=>patrick
+    {"exp" : 4, "dest" :9},  //benoit => stephane
+    {"exp" : 1, "dest" :13}, // mathieu => Christine
+    {"exp" : 2, "dest" :12}, //yves => Yvon
+    {"exp" : 3, "dest" :5}, //martine => pauline
+    {"exp" : 5, "dest" :6}, //pauline => michele
+    {"exp" : 6, "dest" :3}, //michele => martine
+    {"exp" : 7, "dest" :10}, //patrick => bernard
+    {"exp" : 8, "dest" :2}, //thomas => yves
+    {"exp" : 9, "dest" :11}, //stephane => nicole
+    {"exp" : 10, "dest" :1}, //bernard => mathieu
+    {"exp" : 12, "dest" :4}, //Yvon => benoit
+    {"exp" : 13, "dest" :8}, //Christine => thomas
+    ]};
+    
+
   $scope.listExp = null;
   $scope.listDest = null;
   $scope.results = null;
@@ -74,6 +91,18 @@ app.controller('MainCtrl', function($scope) {
         return false;
   }
   
+    checkRun2017 = function(idExp, idDest) {
+        for(var i =0;i < run2017.data.length;i++){
+          if(run2017.data[i].exp === idExp) {
+            if(run2017.data[i].dest === idDest) {
+               return true;
+            }  
+            return false;
+          }
+        }
+        return false;
+  }
+  
   $scope.exportCurrentData = function() {
     var currentExport = {data: []};
     
@@ -103,7 +132,8 @@ app.controller('MainCtrl', function($scope) {
       {"nom" : "bernard", "id" : 10, "famille" :3 },
       {"nom" : "nicole", "id" : 11, "famille" :3 },
       {"nom" : "Yvon", "id" : 12, "famille" :4 },
-      {"nom" : "Christine", "id" : 13, "famille" :4 }
+      {"nom" : "Christine", "id" : 13, "famille" :4 },
+      {"nom" : "Sarah", "id":14, "famille": 2}
     ]};
     
     $scope.listDest = angular.copy($scope.listExp);
@@ -139,6 +169,9 @@ app.controller('MainCtrl', function($scope) {
         }
         else if(checkRun2016($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
           $scope.log2("en 2016 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
+        else if(checkRun2017($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+          $scope.log2("en 2017 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
         }
         else {
           $scope.results.push({
