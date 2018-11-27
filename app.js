@@ -103,6 +103,16 @@ app.controller('MainCtrl', function($scope) {
         return false;
   }
   
+  checkIfExist = function(idExp, idDest) {
+    console.log($scope.results);
+      for(var i =0;i < $scope.results.length;i++){
+          if($scope.results[i].exp.id === idDest && $scope.results[i].dest.id === idExp) {
+               return true;      
+          }
+        }
+        return false;
+  }
+
   $scope.exportCurrentData = function() {
     var currentExport = {data: []};
     
@@ -114,7 +124,7 @@ app.controller('MainCtrl', function($scope) {
   }
   
   $scope.log2 = function(log) {
-    console.log(log);
+    //console.log(log);
     $scope.logText.push(log);
   }
   
@@ -173,6 +183,9 @@ app.controller('MainCtrl', function($scope) {
         else if(checkRun2017($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
           $scope.log2("en 2017 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
         }
+        else if(checkIfExist($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+          $scope.log2("Cette association existe deja dans l'autre sens! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
         else {
           $scope.results.push({
             "exp":$scope.listExp.data[i],
@@ -184,9 +197,16 @@ app.controller('MainCtrl', function($scope) {
         }
         
         j++;
+        if(j==10) {
+            for(var k=0;k<100000000;k++){}
+        }
         if(j>100) {
           $scope.log2("Le programme n'arrive pas a determiner une generation correcte - recommencez !");
-          break;
+             $scope.init();
+            var dataLength = $scope.listExp.data.length;
+            var j = 0;
+            var found = 0;
+            var i=0;    
         }
      }
     
