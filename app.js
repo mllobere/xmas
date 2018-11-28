@@ -45,6 +45,22 @@ app.controller('MainCtrl', function($scope) {
     {"exp" : 13, "dest" :8}, //Christine => thomas
     ]};
     
+    var run2018 = {data:[
+    {"exp" : 2, "dest" :11}, //yves => nicole
+    {"exp" : 3, "dest" :12},  //martine => yvon
+    {"exp" : 4, "dest" :8}, // benoit => thomas
+    {"exp" : 5, "dest" :9}, //pauline => stephane
+    {"exp" : 6, "dest" :5}, //michele => pauline
+    {"exp" : 1, "dest" :14}, //mathieu => Sarah
+    {"exp" : 7, "dest" :13}, //patrick => christine
+    {"exp" : 8, "dest" :10}, //thomas => bernard
+    {"exp" : 9, "dest" :1}, //stephane => mathieu
+    {"exp" : 10, "dest" :4}, //bernard => benoit
+    {"exp" : 11, "dest" :6}, //nicole => michele
+    {"exp" : 12, "dest" :7}, //Yvon => patrick
+    {"exp" : 13, "dest" :2}, //Christine => yves
+    {"exp" : 14, "dest" :3}, //Sarah => martine
+    ]};
 
   $scope.listExp = null;
   $scope.listDest = null;
@@ -91,16 +107,28 @@ app.controller('MainCtrl', function($scope) {
         return false;
   }
   
-    checkRun2017 = function(idExp, idDest) {
-        for(var i =0;i < run2017.data.length;i++){
-          if(run2017.data[i].exp === idExp) {
-            if(run2017.data[i].dest === idDest) {
-               return true;
-            }  
-            return false;
-          }
+  checkRun2017 = function(idExp, idDest) {
+      for(var i =0;i < run2017.data.length;i++){
+        if(run2017.data[i].exp === idExp) {
+          if(run2017.data[i].dest === idDest) {
+              return true;
+          }  
+          return false;
         }
+      }
+      return false;
+  }
+
+  checkRun2018 = function(idExp, idDest) {
+    for(var i =0;i < run2018.data.length;i++){
+      if(run2018.data[i].exp === idExp) {
+        if(run2018.data[i].dest === idDest) {
+            return true;
+        }  
         return false;
+      }
+    }
+    return false;
   }
   
   checkIfExist = function(idExp, idDest) {
@@ -182,6 +210,9 @@ app.controller('MainCtrl', function($scope) {
         }
         else if(checkRun2017($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
           $scope.log2("en 2017 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
+        }
+        else if(checkRun2018($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
+          $scope.log2("en 2018 ! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
         }
         else if(checkIfExist($scope.listExp.data[i].id, $scope.listDest.data[rand].id)) {
           $scope.log2("Cette association existe deja dans l'autre sens! " + $scope.listExp.data[i].nom +"=>" + $scope.listDest.data[rand].nom);
