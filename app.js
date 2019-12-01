@@ -61,6 +61,26 @@ app.controller('MainCtrl', function($scope) {
     {"exp" : 13, "dest" :2}, //Christine => yves
     {"exp" : 14, "dest" :3}, //Sarah => martine
     ]};
+    
+    var run2019 = {"data":[
+      {"exp":1,"dest":8},{"exp":2,"dest":15},{"exp":3,"dest":14},{"exp":4,"dest":11},{"exp":5,"dest":10},{"exp":6,"dest":12},{"exp":7,"dest":16},{"exp":8,"dest":13},{"exp":9,"dest":4},{"exp":10,"dest":3},{"exp":11,"dest":5},{"exp":12,"dest":9},{"exp":13,"dest":6},{"exp":14,"dest":1},{"exp":15,"dest":7},{"exp":16,"dest":2}
+      ]};
+// mathieu => thomas
+// yves => Loïc
+// martine => manu
+// benoit => bernard
+// pauline => sarah
+// michele => nicole
+// patrick => Christelle
+// thomas => marie
+// stephane => benoit
+// sarah => martine
+// bernard => pauline
+// nicole => stephane
+// marie => michele
+// manu => mathieu
+// Loïc => patrick
+// Christelle => yves
 
   $scope.listExp = null;
   $scope.listDest = null;
@@ -162,16 +182,23 @@ app.controller('MainCtrl', function($scope) {
       {"nom" : "yves", "id" : 2, "famille" :1 }, 
       {"nom" : "martine", "id" : 3, "famille" :1 },
       {"nom" : "benoit", "id" : 4, "famille" :1 },
-      {"nom" : "pauline", "id" : 5, "famille" :4 },
+      {"nom" : "pauline", "id" : 5, "famille" :1 },
       {"nom" : "michele", "id" : 6, "famille" :2 },
       {"nom" : "patrick", "id" : 7, "famille" :2 },
       {"nom" : "thomas", "id" : 8, "famille" :2 },
       {"nom" : "stephane", "id" : 9, "famille" :2 },
-      {"nom" : "bernard", "id" : 10, "famille" :3 },
-      {"nom" : "nicole", "id" : 11, "famille" :3 },
-      {"nom" : "Yvon", "id" : 12, "famille" :4 },
-      {"nom" : "Christine", "id" : 13, "famille" :4 },
-      {"nom" : "Sarah", "id":14, "famille": 2}
+      {"nom" : "sarah", "id" : 10, "famille" :2 },
+      {"nom" : "bernard", "id" : 11, "famille" :3 },
+      {"nom" : "nicole", "id" : 12, "famille" :3 },
+      {"nom" : "marie", "id" : 13, "famille" :3 },
+      {"nom" : "manu", "id" : 14, "famille" :3 },
+      {"nom" : "Loïc", "id" : 15, "famille" :3 },
+      {"nom" : "Christelle", "id" : 16, "famille" :3 },
+
+      // {"nom" : "Yvon", "id" : 12, "famille" :4 },
+      // {"nom" : "Christine", "id" : 13, "famille" :4 },
+      
+      // Attention en melangeant les Id des participants, cela fausse les resultats des annees precedentes.
     ]};
     
     $scope.listDest = angular.copy($scope.listExp);
